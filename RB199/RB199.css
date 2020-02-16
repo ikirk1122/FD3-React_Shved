@@ -1,35 +1,59 @@
-.VotesBlock
-{
+.iShop{
   border: double red 3px;
-  width: 380px;
+  width: 95vw;
+  height: 50vh;
   padding: 3px 7px;
-  background-color: #F0F0F0;
+  margin: 10px auto;
+  background-color: lemonchiffon
 }
 
-.VotesBlock .Question
-{
+.iShop .ShopName{
   font-weight: bold;
+  text-align: center;
 }
 
-.VotesBlock .Answers
-{
+.iShop .Lists{
   padding-top: 5px;
+ 
 }
 
-.VotesBlock .Answers .Answer
-{
+.iShop .Lists .List{
   padding: 2px 0;
+  display: flex;
+  flex-basis: auto;
+  justify-content: left; 
+align-items: center;
 }
 
-.VotesBlock .Answers .Answer .Count
-{
-  float: right;
-  width: 30px;
+.iShop .Lists .List .Count{
+  
+    flex-basis: 15%;
   font-weight: bold;
-  text-align: right;
+text-align: center;
 }
 
-.VotesBlock .Answers .Answer .Text
-{
-  margin-right: 30px;
+.iShop .Lists .List .Count{
+  
+    flex-basis: 15%;
+ 
+text-align: center;
+}
+
+
+.iShop .Lists .List .Text{
+    flex-basis: 15%;
+    text-align: center;
+}
+
+.iShop .Lists .List .Prices{
+    flex-basis: 15%;
+    text-align: center;
+    font-style:italic;
+}
+
+
+.iShop .List .List .Imga{
+    flex-basis: 55%;
+    text-align: center;
+    font-size: 9px;
 }

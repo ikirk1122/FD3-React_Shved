@@ -1,6 +1,6 @@
-var VotesBlock = React.createClass({
+var IShop = React.createClass({
 
-    displayName: 'VotesBlock',
+    displayName: 'IShop',
   
     getDefaultProps: function() {
       return { shop: "Просто магазин" }
@@ -8,35 +8,49 @@ var VotesBlock = React.createClass({
   
     render: function() {
   
-        var answersCode=[];
-/*
-function FE (v,i,a,){
-    var answerCode=        
-    React.DOM.div({key:answer.code,className:'Answer'},
-      React.DOM.span({className:'Count'},answer.count),
-      React.DOM.span({className:'Text'},answer.text),
-    );
-  answersCode.push(answerCode);
-
-}
-*/
+        var listFinal=[];
+        var infosFinal=[];
+        
 
 this.props.goods.forEach(FE);
+this.props.info.forEach(FE2);
 
   function FE (v,i,a)  {
-    var answer=a[i];
-        var answerCode=        
-          React.DOM.div({key:answer.code,className:'Answer'},
-            React.DOM.span({className:'Count'},answer.count),
-            React.DOM.span({className:'Text'},answer.text),
+        let temp=a[i];
+        let temp2=        
+          React.DOM.div({key:temp.code,className:'List'},
+          React.DOM.div({className:'Text'},temp.text),
+          React.DOM.div({className:'Prices'},temp.price),
+            React.DOM.div({className:'Count'},temp.count),
+            
+            React.DOM.a({href:temp.source, target:"_b",className:'Imga'},temp.source),
           );
-        answersCode.push(answerCode);
+          listFinal.push(temp2);
 };
+
+function FE2 (v,i,a)  {
+    let temp=a[i];
+    let temp2=        
+        React.DOM.div({key:temp.uniquecode,className:'List'},
+        React.DOM.div({className:'Text'},temp.text),
+        React.DOM.div({className:'Text'},temp.price),
+        React.DOM.div({className:'Text'},temp.count),
+        React.DOM.div({className:'Text'},temp.source),
+        
+              );
+              infosFinal.push(temp2);
+};
+
+
+ 
      
 
-      return React.DOM.div( {className:'VotesBlock'}, 
-        React.DOM.div( {className:'Question'}, this.props.shop ),
-        React.DOM.div( {className:'Answers'}, answersCode ),
+      return React.DOM.div( {className:'iShop'},
+        
+        React.DOM.div( {className:'ShopName'}, this.props.shop ),
+       // React.DOM.div( {className:'Question'}, this.props.info ),
+        React.DOM.div( {className:'Lists'},infosFinal ), 
+        React.DOM.div( {className:'Lists'},listFinal ),
       );
     },
   

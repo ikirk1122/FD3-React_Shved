@@ -2,10 +2,10 @@
 <html> 
 <head> 
   <meta charset="utf-8" />
-  <title>ishop_Shved_k</title>
+  <title>ishop_Shved_K</title>
 </head> 
-<body> 
-  <div id="container"></div> 
+<body style="margin: 0; padding: 0;"> 
+  <div id="main"></div> 
       
   <script src="https://unpkg.com/react@15/dist/react.js"></script> 
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>   
@@ -13,17 +13,25 @@
   <link rel="stylesheet" type="text/css" href="RB199.css" />
 
   <script>
-
+ 
     var shopName='Магазин компьютерной периферии';
+    var infoList=[
+        {text:"Название",price:"Цена",count:"Остаток на складе",source:"Изображение",uniquecode: 100},
+        {text:"товара",price:"в долларах",count:"на сегодня",source:"товара",uniquecode: 101}
+];
     var goodsList=[ 
       {text:'Harper GKB-P100',code:1,price:"46$", source:"https://content2.onliner.by/catalog/device/header/28a6087de9f7e7ab1335d0edba695283.jpeg", count:4}, 
       {text:'Prestigio Click&Touch',code:2,price:"23$", source:"https://content2.onliner.by/catalog/device/header/4f19b2ccc4d70c0e0abb2053f5d4a646.jpeg",count:1}, 
-      {text:'Logitech K120',code:3,price:"12$",source:"https://content2.onliner.by/catalog/device/header/a6671b783fabd9427af40387166336c1.jpeg",count:8} 
+      {text:'Logitech K120',code:3,price:"12$",source:"https://content2.onliner.by/catalog/device/header/a6671b783fabd9427af40387166336c1.jpeg",count:8}, 
+      {text:'HyperX Alloy Origins',code:4,price:"88$",source:"https://content2.onliner.by/catalog/device/header/2ca988f76fef9671b08510d0c45c0d9c.jpeg",count:5} ,
+      {text:'Defender Stainless GK-150DL',code:5,price:"105$",source:"https://content2.onliner.by/catalog/device/header/5f1b88600f89c2b1d649c53ad090d2a1.png",count:0}, 
     ];
 
     ReactDOM.render(
-      React.createElement(VotesBlock,{shop:shopName,goods:goodsList}), 
-      document.getElementById('container') 
+      React.createElement(IShop,{shop:shopName, goods:goodsList, 
+        info:infoList
+    }), 
+      document.getElementById('main') 
     );
 
   </script>
