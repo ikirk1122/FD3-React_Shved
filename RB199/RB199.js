@@ -41,8 +41,6 @@ function FE2 (v,i,a)  {
               infosFinal.push(temp2);
 };
 
-
- 
      
 
       return React.DOM.div( {className:'iShop'},
