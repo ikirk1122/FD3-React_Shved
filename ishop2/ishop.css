@@ -1,0 +1,12 @@
+.iShop{ border: double red 3px; width: 95vw; height: 50vh; padding: 3px 7px; margin: 10px auto; background-color: lemonchiffon}
+.iShop .ShopName{  font-weight: bold;  text-align: center;}
+.iShop .Lists{ padding-top: 5px;}
+
+.iShop .Lists .List{  padding: 2px 0;  display: flex;  flex-basis: auto;  justify-content: space-between; align-items: center;}
+.iShop .Lists .List .Count{     flex-basis: 15%; font-weight: bold;text-align: center;}
+.iShop .Lists .List .Count{     flex-basis: 15%; text-align: center;}
+.iShop .Lists .List .Text{    flex-basis: 15%;    text-align: center;}
+.iShop .Lists .List .Prices{    flex-basis: 15%;    text-align: center;    font-style:italic;}
+.iShop .List .List .Imga{    flex-basis: 55%;    text-align: center;    font-size: 9px;}
+
+.Blue {background-color: aqua;}
