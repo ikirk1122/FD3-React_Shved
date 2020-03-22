@@ -25,8 +25,6 @@ var IGoods = React.createClass({
      this.setState( {goods: nextProps.goods}),
       this.setState( {info: nextProps.info}),
       this.setState( {checked: nextProps.checked})
-
- 
   },
 
 
