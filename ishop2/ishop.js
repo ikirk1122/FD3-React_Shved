@@ -18,10 +18,9 @@ var IShop = React.createClass({
     },
 
     deletedChanged: function(xx) { 
-let y=(this.state.goods).slice(0,((this.state.goods).lelgth));
 function ff (v,i,a){
 return a[i].code!=xx;}
-this.setState((state, props) => ({goods: y.filter(ff)}));
+this.setState((state, props) => ({goods: this.state.goods.filter(ff)}));
      },
 
 
@@ -42,5 +41,3 @@ this.setState((state, props) => ({goods: y.filter(ff)}));
       },
   
   });
-
-
