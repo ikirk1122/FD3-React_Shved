@@ -17,7 +17,6 @@ var IGoods = React.createClass({
       return {
         goods: this.props.goods,
         info: this.props.info,
-        deleted: this.props.deleted,
          checked: this.props.checked,
       };
     },
@@ -42,9 +41,8 @@ var IGoods = React.createClass({
     render: function() {
   
 const classs = "List" + ' ' + "Blue";
-
-var items=this.props.goods.map( v =>
-(v.code in this.state.deleted)?null:React.DOM.div({key:v.code,className:((this.props.checked==v.code)?classs:'List'), data:v.code,onClick:this.checked},
+var items=this.state.goods.map( v =>
+React.DOM.div({key:v.code,className:((this.props.checked==v.code)?classs:'List'), data:v.code,onClick:this.checked},
 React.DOM.div({className:'Text',data:v.code},v.text),
 React.DOM.div({className:'Prices',data:v.code},v.price),
   React.DOM.div({className:'Count',data:v.code},v.count),
