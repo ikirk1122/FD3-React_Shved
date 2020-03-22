@@ -8,8 +8,9 @@ var IShop = React.createClass({
   
     getInitialState: function () {
       return {
-        deleted: {0:true},
         checked: 0,
+        goods: this.props.goods,
+        info: this.props.info,
       };
     },
     checkedChanged: function(x) {  
@@ -17,8 +18,10 @@ var IShop = React.createClass({
     },
 
     deletedChanged: function(xx) { 
-  let a=this.state.deleted; a[xx]=true;
-  this.setState( {deleted:a} );
+let y=(this.state.goods).slice(0,((this.state.goods).lelgth));
+function ff (v,i,a){
+return a[i].code!=xx;}
+this.setState((state, props) => ({goods: y.filter(ff)}));
      },
 
 
@@ -29,8 +32,8 @@ var IShop = React.createClass({
        
         React.DOM.div( {className:'ShopName'}, this.props.shop ),
        React.createElement(IGoods, {className:'Lists', 
-         goods: this.props.goods,
-         info: this.props.info,deleted: this.state.deleted,
+         goods: this.state.goods,
+         info: this.state.info,
          checked: this.state.checked,
          cbcheckedChanged:this.checkedChanged,
          cbdeletedChanged:this.deletedChanged }
@@ -39,4 +42,5 @@ var IShop = React.createClass({
       },
   
   });
+
 
