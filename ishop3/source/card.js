@@ -174,8 +174,8 @@ if (this.state.priceChangeAdd==null||this.state.priceChangeAdd=="") {price="ERRO
 if (this.state.countChangeAdd==null||this.state.countChangeAdd=="") {count="ERROR - empty blank space!"; saveButton={disabled:true}};
 if (this.state.sourceChangeAdd==null||this.state.sourceChangeAdd=="") {source="ERROR - empty blank space!"; saveButton={disabled:true}};
   z=(
-<div className={"Card"} key={662}><div>ADD NEW</div>
-<div><span>ID</span><span>{this.forInCycle(this.state.good)+1}</span></div>
+<div className={"Card"} key={662}><div>ADD MODE</div>
+<div><span>ID</span><span>NEW</span></div>
 <div><div className={"ViewDiv"}>TEXT</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.textChangeAdd} onChange={this.textChange} ></input>
 <span className={"Red"}>{text}</span></div>
 
