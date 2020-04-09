@@ -1,0 +1,20 @@
+﻿div.MobileClient
+{
+  display: flex;
+flex-direction: row;
+justify-content: space-between;
+  padding: 2px 0;
+}
+
+span.MobileClientBalance
+{
+ 
+  width: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.Flex
+{
+  flex-basis: 14.2%;
+}
