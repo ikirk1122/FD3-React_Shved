@@ -21,14 +21,12 @@ class ICard extends React.PureComponent
 
 
   state = {
-       // good: this.props.good,
+
         currentClientId: undefined,
         currentClientFIO: undefined,
         currentClientBalanse: undefined,
 
-        workmode: 0,
-       // checked: this.props.checked,
-    
+        workmode: 0,    
         famAdd: null,
         imAdd: null,
         otchAdd: null,
@@ -45,8 +43,7 @@ class ICard extends React.PureComponent
   componentDidMount = () => {
     mobileEvents.addListener('Addmode',this.setWorkmodeToThree);
     mobileEvents.addListener('EditClient',this.editClient);
-   // mobileEvents.addListener('Cancel',this.cancel);
-   // mobileEvents.addListener('EFreeAnswerTextChanged',this.freeAnswerTextChanged);
+
   };
 
   componentWillUnmount = () => {
@@ -54,16 +51,7 @@ class ICard extends React.PureComponent
     mobileEvents.removeListener('EditClient',this.editClient);
   };
   
-  componentWillReceiveProps(newProps){
-  /*  console.log(newProps)  ;
 
-  this.setState({good: newProps.good});
-  this.setState({checked: newProps.checked});
-  this.setState({workmode: newProps.workmode});
-  
-  this.setState({firstChange: newProps.firstChange});
-  if (newProps.good!=this.state.good) this.setState({kkey: this.state.kkey+1});*/
-  }
 
 forInCycle = (hash) =>{
   let arr=[];
@@ -279,12 +267,7 @@ onChange={this.inputNew} ref={(node)=> {this._inputBalanceAdd = node}}></input>
 
 
 if (this.state.workmode===2) {//edit mode
-/*
-this.state.famEdd=
-this.state.imEdd=
-this.state.otchEdd=
-this.state.balanceEdd=
-*/
+
    let fam = "";   let balance = "";   let im = "";   let otch = ""; let saveButton={};
 
 if (this.state.famEdd==null||this.state.famEdd=="") {fam="Внимание - пустое поле!"; saveButton={disabled:true}};

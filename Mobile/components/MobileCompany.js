@@ -6,6 +6,7 @@ import MobileClient from './MobileClient';
 import ICard from './Card';
 
 import {mobileEvents} from './events';
+import memoize from 'memoizee'
 
 import './MobileCompany.css';
 
@@ -41,10 +42,14 @@ class MobileCompany extends React.PureComponent {
   
 };
 
+
   componentDidMount = () => {
+ 
     mobileEvents.addListener('AddNew',this.addNewclient);
     mobileEvents.addListener('EddNew',this.eddNewclient);
     mobileEvents.addListener('Delete',this.deleteClient);
+    
+
   };
 
   componentWillUnmount = () => {
@@ -158,24 +163,40 @@ if (!(parseInt(newClientProps.balance))){
       this.setState({clients:newClients});
   }
 
+fio ={};//для мутабельных изменений
+memfio;//для мутабельных изменений
 
   render() {
 
     console.log("MobileCompany render");
 
     var clientsCode=this.state.clients.map( client => {
+   if((this.fio[client.id] in this.fio)==false) this.fio[client.id]={};
 
-    
-   // this.notstate.FIO={fam:client.fam,im:client.im,otch:client.otch};//question here!!!
+function calc(a,b,c) {
+  return {fam:a, im:b, otch:c};
+}
+let calcMemoizeed=memoize(calc);
+this.memfio=calcMemoizeed(client.fam,client.im,client.otch) // не работает - ссылки новые
+
+   
+   // this.notstate.FIO={fam:client.fam,im:client.im,otch:client.otch};//так будет новая ссылка, а надо старая
     this.notstate.FIO.fam=client.fam;//question here!!!
     this.notstate.FIO.im=client.im;//question here!!!
     this.notstate.FIO.otch=client.otch;//question here!!!
+
+    this.fio[(client.id)].fam=client.fam;
+    this.fio[(client.id)].im=client.im;
+    this.fio[(client.id)].otch=client.otch;
+    //console.log(this.fio)
       
 
-      let FIO={fam:client.fam,im:client.im,otch:client.otch};//new object ref
+      let FIO={fam:client.fam,im:client.im,otch:client.otch};//для иммутабельных изменений - тут все ок
+//FIO - если нужна новая ссылка и рендер, this.notstate.FIO - если нужна старая ссылка и не нужен рендер
 
-
-      console.log(this.notstate.FIO);
+      console.log(this.notstate.FIO);//когда работает МАР, что фио у клиентов нормальные, но после в отладчике видим, что 
+      //у всех фио, как у последнего и 'value below was evaluated just now'
+      //и в пропсы к лиентам приходят Григорьевы
 
 
         if (this.notstate.changed==true&&this.notstate.changedID==client.id)
