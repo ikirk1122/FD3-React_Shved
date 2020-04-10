@@ -6,31 +6,35 @@ import './MobileClient.css';
 class MobileClient extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.number.isRequired,
-    FIO:PropTypes.shape({
-      fam: PropTypes.string.isRequired,
-      im: PropTypes.string.isRequired,
-      otch: PropTypes.string.isRequired,
-    }),
-    balance: PropTypes.number.isRequired,
+    clientInfo:PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        FIO:PropTypes.shape({
+          fam: PropTypes.string.isRequired,
+          im: PropTypes.string.isRequired,
+          otch: PropTypes.string.isRequired,
+        }),
+    balance: PropTypes.number.isRequired
+  }),
   };
 
   state = {
-    FIO: this.props.FIO,
-    balance: this.props.balance,
+    FIO: this.props.clientInfo.FIO,
+    balance: this.props.clientInfo.balance,
     forceupdate: 1
   };
 
   notstate={//чтобы не рендерился пр изменении
-    view: undefined,
-    viewNow: true
+    view: undefined,//какая кнопка нажата - изначально "Все"
+    viewNow: true//отображается ли клиент сейчас
   };
 
   componentWillReceiveProps = (newProps) => {
-    //console.log(newProps)
-    //console.log("MobileClient id="+this.props.id+" componentWillReceiveProps");
-   if (newProps.balance!=this.state.balance||newProps.FIO!=this.state.FIO) 
-   this.setState({FIO:newProps.FIO,balance:newProps.balance});
+   if (newProps.clientInfo.balance!=this.state.balance
+   ||newProps.clientInfo.FIO.im!=this.state.FIO.im
+   ||newProps.clientInfo.FIO.fam!=this.state.FIO.fam
+   ||newProps.clientInfo.FIO.otch!=this.state.FIO.otch
+    ) 
+   this.setState({FIO: newProps.clientInfo.FIO, balance: newProps.clientInfo.balance});
   };
 
   componentDidMount = () => {
@@ -43,12 +47,12 @@ class MobileClient extends React.PureComponent {
 
   
 
-  setView=(newView)=>{//если меняется режим отображения - логика рендера
- //   if (newView==this.notstate.view){console.log("same") }
+  setView=(newView)=>{//если меняется режим отображения - клиент сохраняет текущее значение кнопки в notstate
+    //но рендерится только при необходимости
 
-if (newView!=this.notstate.view){
+if (newView!=this.notstate.view){//если кнопка нажата новая, отличная от предыдущей
 
-if (newView==undefined){
+if (newView==undefined){//если показать всех
 
           if (this.notstate.viewNow==true)
         {this.notstate.view=newView;}
@@ -57,7 +61,7 @@ if (newView==undefined){
         {this.notstate.view=newView; this.setState({forceupdate: this.state.forceupdate++})}
 }
 
-if (newView==true){
+if (newView==true){//если показать активных
 
   if (this.notstate.viewNow==true&&this.state.balance<=0)
 {this.notstate.view=newView; this.setState({forceupdate: this.state.forceupdate++});}
@@ -72,7 +76,7 @@ if (this.notstate.viewNow==false&&this.state.balance>0)
 };
 
 
-if (newView==false){
+if (newView==false){//если показать заблокированных
 
   if (this.notstate.viewNow==true&&this.state.balance<=0)
 {this.notstate.view=newView; }
@@ -98,12 +102,12 @@ if (this.notstate.viewNow==false&&this.state.balance>0)
 
   deleteEmit=()=>{
     //let hash={...this.props};
-    confirm("Удалить?")&&(mobileEvents.emit('Delete',this.props.id))
+    confirm("Удалить?")&&(mobileEvents.emit('Delete',this.props.clientInfo.id))
   }
 
   render() {
 
-    console.log("MobileClient id="+this.props.id+" render");
+    console.log("MobileClient id="+this.props.clientInfo.id+" render");
     let color={backgroundColor: "lightgreen"}; let status="Активный";
     if (this.state.balance<=0) {color={backgroundColor: "lightcoral"};  status="Заблокированный"};
     

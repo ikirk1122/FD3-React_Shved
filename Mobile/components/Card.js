@@ -9,17 +9,6 @@ import {mobileEvents} from './events';
 class ICard extends React.PureComponent
 {
 
-  static propTypes = {
-   // good: PropTypes.object,
-    
-    //checked: PropTypes.any,
-    //workmode: PropTypes.any.isRequired,
-   // cbCancel: PropTypes.func.isRequired,
-   // cbAdd: PropTypes.func.isRequired,
-    //firstChange: PropTypes.any.isRequired,
-  };
-
-
   state = {
 
         currentClientId: undefined,
@@ -36,7 +25,6 @@ class ICard extends React.PureComponent
         otchEdd: null,
         balanceEdd: null,
 
-       // firstChange: this.props.firstChange,
         kkey: 10000000
   }
 
@@ -76,16 +64,16 @@ addVolume = {
   };
 
   editClient=(clientProps)=>{
-   // console.log("Card-edit!")
+  
     this.setState({workmode:2, 
       kkey: (this.state.kkey+1),
-      currentClientId: clientProps.id, 
-      currentClientFIO: clientProps.FIO, 
-      currentClientBalanse: clientProps.balance,
-      famEdd: clientProps.FIO.fam,
-      imEdd: clientProps.FIO.im,
-      otchEdd: clientProps.FIO.otch,
-      balanceEdd: clientProps.balance
+      currentClientId: clientProps.clientInfo.id, 
+      currentClientFIO: clientProps.clientInfo.FIO, 
+      currentClientBalanse: clientProps.clientInfo.balance,
+      famEdd: clientProps.clientInfo.FIO.fam,
+      imEdd: clientProps.clientInfo.FIO.im,
+      otchEdd: clientProps.clientInfo.FIO.otch,
+      balanceEdd: clientProps.clientInfo.balance
     })
   
   }
@@ -149,7 +137,7 @@ firstChange = () =>{
 }
 
 setWorkmodeToThree = (code) =>{
-  this.setState({workmode:code})
+  this.setState({workmode:code})//- 3
 }
 
 cancel = (EO) => { 
@@ -223,7 +211,7 @@ inputOld = () => {//needed for validation only
 
       let f1,f2,f3,f4=0;
 
-let z=null;//render value - renders nothing
+let output=null;//render value - renders nothing
 
 
 if (this.state.workmode===3) {//add mode
@@ -235,7 +223,7 @@ if (this.state.imAdd==null||this.state.imAdd=="") {im="Внимание - пус
 if (this.state.otchAdd==null||this.state.otchAdd=="") {otch="Внимание - пустое поле!"; saveButton={disabled:true}};
 if (this.state.balanceAdd==null||this.state.balanceAdd=="") {balance="Необходимо число!"; saveButton={disabled:true}};
 
-  z=(
+  output=(
 <div className={"Card"} key={662}><div>Добавить нового клиента</div>
 
 
@@ -263,9 +251,6 @@ onChange={this.inputNew} ref={(node)=> {this._inputBalanceAdd = node}}></input>
 
 
 
-
-
-
 if (this.state.workmode===2) {//edit mode
 
    let fam = "";   let balance = "";   let im = "";   let otch = ""; let saveButton={};
@@ -275,7 +260,7 @@ if (this.state.imEdd==null||this.state.imEdd=="") {im="Внимание - пус
 if (this.state.otchEdd==null||this.state.otchEdd=="") {otch="Внимание - пустое поле!"; saveButton={disabled:true}};
 if (this.state.balanceEdd==null||this.state.balanceEdd=="") {balance="Необходимо число!"; saveButton={disabled:true}};
 
-  z=(
+  output=(
 <div className={"Card"} key={this.state.kkey}><div>Редактировать клиента</div>
 <div>{this.state.currentClientId}</div>
 
@@ -303,12 +288,10 @@ onChange={this.inputOld} ref={(node)=> {this._inputBalanceEdd = node}}></input>
 
 if (this.state.workmode===0) {//view mode
  
-   z=(
-   //<div className={"Card"} key={665}>  <div>пусто отладка!</div>  </div>
-   null)
+   output=(null)
 
   };
-
+/*
 if (this.state.workmode===1&&this.forInCycle(this.state.good)!=0) {
   f1=this.state.good.text;
   f2=this.state.good.price;
@@ -316,7 +299,7 @@ if (this.state.workmode===1&&this.forInCycle(this.state.good)!=0) {
   f4=this.state.good.source
 
 
-  z=(<div className={"Card"} key={666}>
+  output=(<div className={"Card"} key={666}>
 <div>VIEW</div>
 <div><span>ID</span><span>{this.state.good.code} </span></div>
 <div><div className={"ViewDiv"}>TEXT</div><input className={"ViewInput"} type={"text"} value={f1} readOnly></input></div>
@@ -326,9 +309,10 @@ if (this.state.workmode===1&&this.forInCycle(this.state.good)!=0) {
 <div>
 </div>
 </div>)};
+*/
 
 console.log("Card RENDER!")
-      return(z)//variable 
+      return(output)//variable 
     }  
   }
 

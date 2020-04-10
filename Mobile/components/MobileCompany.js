@@ -6,7 +6,7 @@ import MobileClient from './MobileClient';
 import ICard from './Card';
 
 import {mobileEvents} from './events';
-import memoize from 'memoizee'
+//import memoize from 'memoizee'
 
 import './MobileCompany.css';
 
@@ -58,11 +58,6 @@ class MobileCompany extends React.PureComponent {
     mobileEvents.removeListener('Delete',this.deleteClient);
   };
   
-cancel = () =>{
-//works, but commented
- //let a= ReactDOM.findDOMNode(this._cardComp._inputBalanceAdd);  console.log(a);//ref to another component's input
- //let b =a.value;  console.log(b);
-}
 
   setName1 = () => {
     if (this.state.brandname!=="МТС")
@@ -96,14 +91,12 @@ cancel = () =>{
        if (this.state.clients[i].id!=idd)
        newClients.push(this.state.clients[i])
      };
- 
        this.setState({clients:newClients});
    }
  
   
 
   addNewclient = (hash) =>{
- 
     let newClientProps={
       im: hash.imAdd,
       fam: hash.famAdd,
@@ -113,8 +106,7 @@ cancel = () =>{
 if (!(parseInt(newClientProps.balance))){ 
   newClientProps.balance=-100500};
 
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-    let oldClientsId=[];
+    let newClients=[...this.state.clients]; 
     let newId;
 
     for (let i=0; i<newClients.length; i++){
@@ -160,61 +152,35 @@ if (!(parseInt(newClientProps.balance))){
     } );
     
     if ( changed )
-      this.setState({clients:newClients});
+      this.setState({clients: newClients});
+      
   }
 
-fio ={};//для мутабельных изменений
-memfio;//для мутабельных изменений
 
   render() {
-
     console.log("MobileCompany render");
 
     var clientsCode=this.state.clients.map( client => {
-   if((this.fio[client.id] in this.fio)==false) this.fio[client.id]={};
+ 
+    this.notstate.FIO={fam:client.fam,im:client.im,otch:client.otch};//если нужна старая ссылка и не нужен рендер
+       /* this.notstate.FIO.fam=client.fam; this.notstate.FIO.im=client.im; this.notstate.FIO.otch=client.otch; */
 
-function calc(a,b,c) {
-  return {fam:a, im:b, otch:c};
-}
-let calcMemoizeed=memoize(calc);
-this.memfio=calcMemoizeed(client.fam,client.im,client.otch) // не работает - ссылки новые
+let FIO={fam:client.fam,im:client.im,otch:client.otch};//для иммут.изменений- если нужна новая ссылка и рендер 
+let clientInfoImmut = {id: client.id, balance: client.balance, FIO: FIO}
 
-   
-   // this.notstate.FIO={fam:client.fam,im:client.im,otch:client.otch};//так будет новая ссылка, а надо старая
-    this.notstate.FIO.fam=client.fam;//question here!!!
-    this.notstate.FIO.im=client.im;//question here!!!
-    this.notstate.FIO.otch=client.otch;//question here!!!
+/*
+        if (this.notstate.changed==true&&this.notstate.changedID==client.id){
+         this.notstate.changedID=undefined; this.notstate.changed=false;
+       return <MobileClient key={client.id} id={client.id} FIO={FIO} balance={client.balance} />};
 
-    this.fio[(client.id)].fam=client.fam;
-    this.fio[(client.id)].im=client.im;
-    this.fio[(client.id)].otch=client.otch;
-    //console.log(this.fio)
-      
+        if (this.notstate.changed==true&&this.notstate.changedID!=client.id){
+        return <MobileClient key={client.id} id={client.id} FIO={this.notstate.FIO} balance={client.balance} />;};
 
-      let FIO={fam:client.fam,im:client.im,otch:client.otch};//для иммутабельных изменений - тут все ок
-//FIO - если нужна новая ссылка и рендер, this.notstate.FIO - если нужна старая ссылка и не нужен рендер
-
-      console.log(this.notstate.FIO);//когда работает МАР, что фио у клиентов нормальные, но после в отладчике видим, что 
-      //у всех фио, как у последнего и 'value below was evaluated just now'
-      //и в пропсы к лиентам приходят Григорьевы
-
-
-        if (this.notstate.changed==true&&this.notstate.changedID==client.id)
-        {this.notstate.changedID=undefined; this.notstate.changed=false;
-        return <MobileClient key={client.id} id={client.id} FIO={FIO} balance={client.balance} />};
-        if (this.notstate.changed==true&&this.notstate.changedID!=client.id)
-        {
-        return <MobileClient key={client.id} id={client.id} FIO={this.notstate.FIO} balance={client.balance} />;
-        
-      };
-        if (this.notstate.changed==false){
-        return <MobileClient key={client.id} id={client.id} FIO={this.notstate.FIO} balance={client.balance} />;}
-        
-      
-      }
-     
-      
-    );
+        if (this.notstate.changed==false){*/
+          
+        return <MobileClient key={client.id} clientInfo={clientInfoImmut} />;   
+    // }
+});
 
     return (
       <div className='MobileCompany'>
@@ -223,24 +189,24 @@ this.memfio=calcMemoizeed(client.fam,client.im,client.otch) // не работа
    
         <div className='MobileCompanyName'>Компания: {this.state.brandname}</div>
         <div className='Borders'>
-        <input type="button" value="Все"  onClick={this.setVal1}/>
-        <input type="button" value="Активные"  onClick={this.setVal2}/>
-        <input type="button" value="Заблокированные"  onClick={this.setVal3}/>
+         <input type="button" value="Все"  onClick={this.setVal1}/>
+          <input type="button" value="Активные"  onClick={this.setVal2}/>
+           <input type="button" value="Заблокированные"  onClick={this.setVal3}/>
         </div>
         <div className='MobileCompanyDescription'>
           <div className='Flex'>Фамилия</div>
-          <div className='Flex'>Имя</div>
-          <div className='Flex'>Отчество</div>
-          <div className='Flex'>Баланс</div>
-          <div className='Flex'>Статус</div>
-          <div className='Flex'>Редактировать</div>
-          <div className='Flex'>Удалить</div>
+            <div className='Flex'>Имя</div>
+             <div className='Flex'>Отчество</div>
+               <div className='Flex'>Баланс</div>
+                 <div className='Flex'>Статус</div>
+                    <div className='Flex'>Редактировать</div>
+                      <div className='Flex'>Удалить</div>
         </div>
         <div className='MobileCompanyClients'>
           {clientsCode}
         </div>
         <input type="button" value="Добавить нового клиента" onClick={this.addnew} />
-<ICard key={123456789} ref={(node)=>{this._cardComp = node}}></ICard>
+        <ICard></ICard>
       </div>
     )
     ;
