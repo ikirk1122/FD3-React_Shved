@@ -107,7 +107,7 @@ if (!(parseInt(newClientProps.balance))){
   newClientProps.balance=-100500};
 
     let newClients=[...this.state.clients]; 
-    let newId;
+    let newId; let oldClientsId=[];
 
     for (let i=0; i<newClients.length; i++){
       oldClientsId.push(newClients[i].id)
@@ -160,26 +160,9 @@ if (!(parseInt(newClientProps.balance))){
   render() {
     console.log("MobileCompany render");
 
-    var clientsCode=this.state.clients.map( client => {
- 
-    this.notstate.FIO={fam:client.fam,im:client.im,otch:client.otch};//если нужна старая ссылка и не нужен рендер
-       /* this.notstate.FIO.fam=client.fam; this.notstate.FIO.im=client.im; this.notstate.FIO.otch=client.otch; */
+    var clientsCode=this.state.clients.map( client => {      
+        return <MobileClient key={client.id} clientInfo={client} />;   
 
-let FIO={fam:client.fam,im:client.im,otch:client.otch};//для иммут.изменений- если нужна новая ссылка и рендер 
-let clientInfoImmut = {id: client.id, balance: client.balance, FIO: FIO}
-
-/*
-        if (this.notstate.changed==true&&this.notstate.changedID==client.id){
-         this.notstate.changedID=undefined; this.notstate.changed=false;
-       return <MobileClient key={client.id} id={client.id} FIO={FIO} balance={client.balance} />};
-
-        if (this.notstate.changed==true&&this.notstate.changedID!=client.id){
-        return <MobileClient key={client.id} id={client.id} FIO={this.notstate.FIO} balance={client.balance} />;};
-
-        if (this.notstate.changed==false){*/
-          
-        return <MobileClient key={client.id} clientInfo={clientInfoImmut} />;   
-    // }
 });
 
     return (

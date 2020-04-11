@@ -68,11 +68,16 @@ addVolume = {
     this.setState({workmode:2, 
       kkey: (this.state.kkey+1),
       currentClientId: clientProps.clientInfo.id, 
-      currentClientFIO: clientProps.clientInfo.FIO, 
+      currentClientFam: clientProps.clientInfo.fam,
+      currentClientIm: clientProps.clientInfo.im,
+      currentClientOtch: clientProps.clientInfo.otch, 
+
+
+  
       currentClientBalanse: clientProps.clientInfo.balance,
-      famEdd: clientProps.clientInfo.FIO.fam,
-      imEdd: clientProps.clientInfo.FIO.im,
-      otchEdd: clientProps.clientInfo.FIO.otch,
+      famEdd: clientProps.clientInfo.fam,
+      imEdd: clientProps.clientInfo.im,
+      otchEdd: clientProps.clientInfo.otch,
       balanceEdd: clientProps.clientInfo.balance
     })
   
@@ -151,7 +156,6 @@ cancel = (EO) => {
         imAdd: null,
         otchAdd: null,
         balanceAdd: null})
- // mobileEvents.emit('Cancel',0);
 }
 
 addEmit = () => { //sends proprpties of new client via EventEmitter
@@ -265,15 +269,15 @@ if (this.state.balanceEdd==null||this.state.balanceEdd=="") {balance="Необх
 <div>{this.state.currentClientId}</div>
 
 
-<div><div className={"ViewDiv"}>Фамилия</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientFIO.fam} 
+<div><div className={"ViewDiv"}>Фамилия</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientFam} 
 onChange={this.inputOld} ref={(node)=> {this._inputFamEdd = node}}></input>
 <span className={"Red"}>{fam}</span></div>
 
-<div><div className={"ViewDiv"}>Имя</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientFIO.im} 
+<div><div className={"ViewDiv"}>Имя</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientIm} 
 onChange={this.inputOld} ref={(node)=> {this._inputImEdd = node}}></input>
 <span className={"Red"}>{im}</span></div>
 
-<div><div className={"ViewDiv"}>Отчество</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientFIO.otch} 
+<div><div className={"ViewDiv"}>Отчество</div><input className={"ViewInput"} type={"text"} defaultValue={this.state.currentClientOtch} 
 onChange={this.inputOld} ref={(node)=> {this._inputOtchEdd = node}}></input>
 <span className={"Red"}>{otch}</span></div>
 
@@ -291,27 +295,9 @@ if (this.state.workmode===0) {//view mode
    output=(null)
 
   };
-/*
-if (this.state.workmode===1&&this.forInCycle(this.state.good)!=0) {
-  f1=this.state.good.text;
-  f2=this.state.good.price;
-  f3=this.state.good.count;
-  f4=this.state.good.source
 
 
-  output=(<div className={"Card"} key={666}>
-<div>VIEW</div>
-<div><span>ID</span><span>{this.state.good.code} </span></div>
-<div><div className={"ViewDiv"}>TEXT</div><input className={"ViewInput"} type={"text"} value={f1} readOnly></input></div>
-<div><div className={"ViewDiv"}>PRICE</div><input className={"ViewInput"} type={"text"} value={f2} readOnly></input></div>
-<div><div className={"ViewDiv"}>COUNT</div><input className={"ViewInput"} type={"text"} value={f3} readOnly></input></div>
-<div><div className={"ViewDiv"}>SOURCE</div><input className={"ViewInput"} type={"text"} value={f4} readOnly></input></div>
-<div>
-</div>
-</div>)};
-*/
-
-console.log("Card RENDER!")
+console.log("Card render")
       return(output)//variable 
     }  
   }

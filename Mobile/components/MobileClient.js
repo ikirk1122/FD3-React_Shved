@@ -8,19 +8,19 @@ class MobileClient extends React.PureComponent {
   static propTypes = {
     clientInfo:PropTypes.shape({
         id: PropTypes.number.isRequired,
-        FIO:PropTypes.shape({
           fam: PropTypes.string.isRequired,
           im: PropTypes.string.isRequired,
           otch: PropTypes.string.isRequired,
-        }),
     balance: PropTypes.number.isRequired
   }),
   };
 
   state = {
-    FIO: this.props.clientInfo.FIO,
-    balance: this.props.clientInfo.balance,
-    forceupdate: 1
+          fam: this.props.clientInfo.fam,
+          im: this.props.clientInfo.im,
+          otch: this.props.clientInfo.otch,
+          balance: this.props.clientInfo.balance,
+          forceupdate: 1
   };
 
   notstate={//чтобы не рендерился пр изменении
@@ -29,12 +29,15 @@ class MobileClient extends React.PureComponent {
   };
 
   componentWillReceiveProps = (newProps) => {
-   if (newProps.clientInfo.balance!=this.state.balance
-   ||newProps.clientInfo.FIO.im!=this.state.FIO.im
-   ||newProps.clientInfo.FIO.fam!=this.state.FIO.fam
-   ||newProps.clientInfo.FIO.otch!=this.state.FIO.otch
-    ) 
-   this.setState({FIO: newProps.clientInfo.FIO, balance: newProps.clientInfo.balance});
+ /*  if (newProps.clientInfo.balance!=this.state.balance
+   ||newProps.clientInfo.im!=this.state.im
+   ||newProps.clientInfo.fam!=this.state.fam
+   ||newProps.clientInfo.otch!=this.state.otch) */
+
+     this.setState({im: newProps.clientInfo.im, 
+    fam: newProps.clientInfo.fam,
+    otch: newProps.clientInfo.otch,
+    balance: newProps.clientInfo.balance});
   };
 
   componentDidMount = () => {
@@ -101,8 +104,8 @@ if (this.notstate.viewNow==false&&this.state.balance>0)
   }
 
   deleteEmit=()=>{
-    //let hash={...this.props};
-    confirm("Удалить?")&&(mobileEvents.emit('Delete',this.props.clientInfo.id))
+
+    confirm("Удалить информацию о клиенте?")&&(mobileEvents.emit('Delete',this.props.clientInfo.id))
   }
 
   render() {
@@ -112,9 +115,9 @@ if (this.notstate.viewNow==false&&this.state.balance>0)
     if (this.state.balance<=0) {color={backgroundColor: "lightcoral"};  status="Заблокированный"};
     
     let output=(<div className='MobileClient'>     
-    <div className='MobileClientFIO Flex'>{this.state.FIO.fam}</div>
-    <div className='MobileClientFIO Flex'>{this.state.FIO.im}</div>
-    <div className='MobileClientFIO Flex'>{this.state.FIO.otch}</div>
+    <div className='MobileClientFIO Flex'>{this.state.fam}</div>
+    <div className='MobileClientFIO Flex'>{this.state.im}</div>
+    <div className='MobileClientFIO Flex'>{this.state.otch}</div>
     <div className='MobileClientBalance Flex'>{this.state.balance}</div>
     <div className='Flex' style={color}>{status}</div>
     <input className='Flex' type="button" value="Редактировать" onClick={this.editEmit}></input>
