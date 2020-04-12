@@ -27,8 +27,7 @@ class MobileCompany extends React.PureComponent {
   state = {
     brandname: 'Velcom',
     clients: this.props.clients,
-   // workmode: 0,//0 -no card, 3 - add mode, 2 - edit mode
-    
+   viewmode: undefined,//undefined-all clients, true-active clients,false-locked clients
   };
 
   notstate={//my additional storage
@@ -38,8 +37,6 @@ class MobileCompany extends React.PureComponent {
         im: undefined,
         otch: undefined,
         FIO: {},
-  viewmode: undefined,//undefined-all clients, true-active clients,false-locked clients
-  
 };
 
 
@@ -70,15 +67,20 @@ class MobileCompany extends React.PureComponent {
   };
   
   setVal1 = () => {
-    mobileEvents.emit('ViewChange',undefined);
+
+this.setState({viewmode: undefined})
+
   };
 
   setVal2 = () => {
-    mobileEvents.emit('ViewChange',true);
+
+    this.setState({viewmode: true})
+
   };
 
   setVal3 = () => {
-    mobileEvents.emit('ViewChange',false);
+    this.setState({viewmode: false})
+
   };
   
   addnew = () =>{
@@ -154,16 +156,31 @@ if (!(parseInt(newClientProps.balance))){
     if ( changed )
       this.setState({clients: newClients});
       
-  }
+  };
 
 
   render() {
     console.log("MobileCompany render");
+    
+    let clientsCode=[];
 
-    var clientsCode=this.state.clients.map( client => {      
-        return <MobileClient key={client.id} clientInfo={client} />;   
+    for (let i=0; i<this.state.clients.length; i++){ 
+     let client=this.state.clients[i];
 
-});
+     if (this.state.viewmode==undefined){//если показать всех
+      clientsCode.push(<MobileClient key={client.id} clientInfo={client} />) ;
+    }
+
+    if (this.state.viewmode==true&&client.balance>0){//если показать активных  
+      clientsCode.push(<MobileClient key={client.id} clientInfo={client} />)
+    }
+
+    if (this.state.viewmode==false&&client.balance<=0){//если показать заблокированных
+      clientsCode.push(<MobileClient key={client.id} clientInfo={client} />) 
+    }
+   
+};
+
 
     return (
       <div className='MobileCompany'>

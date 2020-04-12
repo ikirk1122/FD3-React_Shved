@@ -40,14 +40,6 @@ class ICard extends React.PureComponent
   };
   
 
-
-forInCycle = (hash) =>{
-  let arr=[];
-for (var i in hash){
-arr.push(hash.i)
-} return arr.length
-}
-
 changeVolume = {
 textChangeEdd: null,
 countChangeEdd: null,
@@ -80,6 +72,7 @@ addVolume = {
       otchEdd: clientProps.clientInfo.otch,
       balanceEdd: clientProps.clientInfo.balance
     })
+
   
   }
 
