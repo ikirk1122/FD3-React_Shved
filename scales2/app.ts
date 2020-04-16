@@ -16,12 +16,12 @@ class Banana implements IScalable{//no more product, just banana
     }
 
     getScale ():number {
-       // console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
+        console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
         return this.scale
     }
 
     getName():string {
-       // console.log("name of product is "+this.name);//not mandatory
+        console.log("name of product is "+this.name);//not mandatory
         return this.name
     }
 
@@ -39,12 +39,12 @@ class Apple implements IScalable{//no more product, just banana
     }
 
     getScale ():number {
-       // console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
+       console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
         return this.scale
     }
 
     getName():string {
-       // console.log("name of product is "+this.name);//not mandatory
+       console.log("name of product is "+this.name);//not mandatory
         return this.name
     }
 
