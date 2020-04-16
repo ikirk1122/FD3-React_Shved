@@ -97,4 +97,3 @@ banana1.getName();
 banana1.getScale();//25
 apple1.getName();
 apple1.getScale();//35
-
