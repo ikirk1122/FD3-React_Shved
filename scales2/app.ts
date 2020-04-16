@@ -1,67 +1,50 @@
-interface IBaseInterface {
+interface IScalable { //now one interface
     getScale ():number;
-}
-
-interface IScalable extends IBaseInterface{  
     getName():string;
 }
 
 
-class Product{
+class Banana implements IScalable{//no more product, just banana
 
     scale:number;
     name:string;
 
-    constructor(_name:string,_scale:number) {
-
-    this.name=_name;
-    this.scale=_scale;
-}
-
-}
-
-class Banana extends Product implements IScalable{
-
-    //scale:number;
-    //name:string;
-
     constructor() {//теперь все бананы по 25 грамм
-        super(("banana №"+(Math.random()*100).toFixed(0)), 25);
-      // this.name=("banana №"+(Math.random()*100).toFixed(0));
-       // this.scale=25;
+
+      this.name=("banana №"+(Math.random()*100).toFixed(0));
+        this.scale=25;
     }
 
     getScale ():number {
-        console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
+       // console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
         return this.scale
     }
 
     getName():string {
-        console.log("name of product is "+this.name);//not mandatory
+       // console.log("name of product is "+this.name);//not mandatory
         return this.name
     }
 
 }
 
-class Apple implements IScalable{
+class Apple implements IScalable{//no more product, just banana
 
     scale:number;
     name:string;
 
     constructor() {//теперь все яблоки по 35 грамм
-        //super(("apple №"+(Math.random()*100).toFixed(0)), 35);
         this.name=("apple №"+(Math.random()*100).toFixed(0));
         this.scale=35;
 
     }
 
     getScale ():number {
-        console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
+       // console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
         return this.scale
     }
 
     getName():string {
-        console.log("name of product is "+this.name);//not mandatory
+       // console.log("name of product is "+this.name);//not mandatory
         return this.name
     }
 
