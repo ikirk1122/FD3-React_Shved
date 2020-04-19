@@ -3,16 +3,71 @@ interface IScalable { //now one interface
     getName():string;
 }
 
+interface IStorageEngine{ //now one interface
+    addItem(item:Product):void; 
+    getItem(index:number):Product;  
+    getCount():number; 
+}
 
-class Banana implements IScalable{//no more product, just banana
+class ScalesStorageEngineArray{
 
-    scale:number;
-    name:string;
+    products:Array<Product>=[];
 
-    constructor() {//теперь все бананы по 25 грамм
+    addItem(item:Product):void {
+this.products.push(item);
+    }
 
-      this.name=("banana №"+(Math.random()*100).toFixed(0));
-        this.scale=25;
+    getItem(index:number):Product {
+        return this.products[index]
+    }
+
+    getCount():number {
+        return this.products.length
+    }
+
+
+}
+
+class ScalesStorageEngineLocalStorage {
+    lsk: string='productsKey';
+
+    products:Array<Product>=[];
+
+    addItem(item:Product):void {
+
+
+if (localStorage.getItem("productsKey")==undefined) localStorage.setItem("productsKey",JSON.stringify(new Array));
+let a:any=JSON.parse(localStorage.getItem("productsKey"));
+localStorage.setItem("productsKey",a);
+
+    };
+
+
+    
+
+    getItem(index:number):Product {
+        return this.products[index]
+    }
+
+    getCount():number {
+        return this.products.length
+    }
+
+
+}
+
+
+
+
+class Product implements IScalable{
+
+   private scale:number;
+   private name:string;
+
+    constructor() {
+
+    this.name=("product №"+(Math.random()*100).toFixed(0));
+    this.scale=17;
     }
 
     getScale ():number {
@@ -27,31 +82,8 @@ class Banana implements IScalable{//no more product, just banana
 
 }
 
-class Apple implements IScalable{//no more product, just banana
 
-    scale:number;
-    name:string;
-
-    constructor() {//теперь все яблоки по 35 грамм
-        this.name=("apple №"+(Math.random()*100).toFixed(0));
-        this.scale=35;
-
-    }
-
-    getScale ():number {
-       console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
-        return this.scale
-    }
-
-    getName():string {
-       console.log("name of product is "+this.name);//not mandatory
-        return this.name
-    }
-
-};
-
-
-class Scales{
+class Scales <StorageEngine extends IStorageEngine>{
 
     products: Array <IScalable>= [];//массив объектов реализующих указанный интерфейс IScalable
 
@@ -77,7 +109,11 @@ this.products.push(prod)
             return answer}
 };
 
-/*-----------------tests------------------*/
+
+
+
+
+/*-----------------tests------------------
 
 let scale1= new Scales ();
 let banana1= new Banana ();
@@ -97,3 +133,4 @@ banana1.getName();
 banana1.getScale();//25
 apple1.getName();
 apple1.getScale();//35
+*/
