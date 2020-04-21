@@ -1,101 +1,101 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
+var ScalesStorageEngineArray = /** @class */ (function () {
+    function ScalesStorageEngineArray() {
+        this.products = [];
+    }
+    ScalesStorageEngineArray.prototype.addItem = function (item) {
+        this.products.push(item);
     };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    ScalesStorageEngineArray.prototype.getItem = function (index) {
+        return this.products[index];
     };
-})();
+    ScalesStorageEngineArray.prototype.getCount = function () {
+        return this.products.length;
+    };
+    return ScalesStorageEngineArray;
+}());
+var ScalesStorageEngineLocalStorage = /** @class */ (function () {
+    function ScalesStorageEngineLocalStorage() {
+        this.lsk = 'productsKey';
+    }
+    ScalesStorageEngineLocalStorage.prototype.addItem = function (item) {
+        if (localStorage.getItem(this.lsk) == undefined)
+            localStorage.setItem(this.lsk, JSON.stringify(new Array));
+        var a = JSON.parse(localStorage.getItem(this.lsk));
+        //let temp:object={name:item.getName(),scale:item.getScale()}
+        a.push(item);
+        localStorage.setItem(this.lsk, JSON.stringify(a));
+    };
+    ;
+    ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
+        var b = JSON.parse(localStorage.getItem(this.lsk));
+        return new Product(b[index].name, b[index].scale);
+    };
+    ScalesStorageEngineLocalStorage.prototype.getCount = function () {
+        var b = JSON.parse(localStorage.getItem(this.lsk));
+        return b.length;
+    };
+    return ScalesStorageEngineLocalStorage;
+}());
 var Product = /** @class */ (function () {
     function Product(_name, _scale) {
+        //  this.name=("product "+_name+" #"+(Math.random()*100).toFixed(0));
         this.name = _name;
         this.scale = _scale;
     }
+    Product.prototype.getScale = function () {
+        //  console.log("scale of "+this.name+" is "+this.scale+" gramm"); //not mandatory
+        return this.scale;
+    };
+    Product.prototype.getName = function () {
+        //  console.log("name of product is "+this.name);//not mandatory
+        return this.name;
+    };
     return Product;
 }());
-var Banana = /** @class */ (function (_super) {
-    __extends(Banana, _super);
-    //scale:number;
-    //name:string;
-    function Banana() {
-        return _super.call(this, ("banana №" + (Math.random() * 100).toFixed(0)), 25) || this;
-        // this.name=("banana №"+(Math.random()*100).toFixed(0));
-        // this.scale=25;
-    }
-    Banana.prototype.getScale = function () {
-        console.log("scale of " + this.name + " is " + this.scale + " gramm"); //not mandatory
-        return this.scale;
-    };
-    Banana.prototype.getName = function () {
-        console.log("name of product is " + this.name); //not mandatory
-        return this.name;
-    };
-    return Banana;
-}(Product));
-var Apple = /** @class */ (function () {
-    function Apple() {
-        //super(("apple №"+(Math.random()*100).toFixed(0)), 35);
-        this.name = ("apple №" + (Math.random() * 100).toFixed(0));
-        this.scale = 35;
-    }
-    Apple.prototype.getScale = function () {
-        console.log("scale of " + this.name + " is " + this.scale + " gramm"); //not mandatory
-        return this.scale;
-    };
-    Apple.prototype.getName = function () {
-        console.log("name of product is " + this.name); //not mandatory
-        return this.name;
-    };
-    return Apple;
-}());
-;
 var Scales = /** @class */ (function () {
-    function Scales() {
-        this.products = []; //массив объектов реализующих указанный интерфейс IScalable
+    function Scales(_storageEngine) {
+        this.storageEngine = _storageEngine;
     }
     Scales.prototype.add = function (prod) {
-        this.products.push(prod);
+        this.storageEngine.addItem(prod);
     };
     ;
     Scales.prototype.getSumScale = function () {
         var answer = 0;
-        for (var i = 0; i < this.products.length; i++) {
-            answer = answer + this.products[i].getScale();
-        } //call method not property
-        console.log(answer); //not mandatory
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            answer = answer + this.storageEngine.getItem(i).getScale();
+        }
+        console.log(answer); //needed for this task
         return answer;
     };
     ;
     Scales.prototype.getNameList = function () {
         var answer = [];
-        for (var i = 0; i < this.products.length; i++) {
-            answer.push(this.products[i].getName());
-        } //call method not property
-        console.log(answer); //not mandatory
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            answer.push(this.storageEngine.getItem(i).getName());
+        }
+        console.log(answer); //needed for this task
         return answer;
     };
     return Scales;
 }());
 ;
-/*-----------------tests------------------*/
-var scale1 = new Scales();
-var banana1 = new Banana();
-var banana2 = new Banana();
-var apple1 = new Apple();
-var apple2 = new Apple();
-scale1.add(banana1);
-scale1.add(apple1);
-scale1.add(banana2);
-scale1.add(apple2);
-scale1.getNameList(); //array of 4 Obj
-scale1.getSumScale(); //120
-banana1.getName();
-banana1.getScale(); //25
-apple1.getName();
-apple1.getScale(); //35
+var scalesLocal = new Scales(new ScalesStorageEngineLocalStorage);
+var scalesArray = new Scales(new ScalesStorageEngineArray);
+var banana = new Product('banana', 23);
+var apple = new Product("apple", 26);
+var orange = new Product("orange", 24);
+var coconut = new Product("coconut", 27);
+scalesArray.add(banana);
+scalesArray.add(apple);
+scalesArray.add(orange);
+scalesArray.add(coconut);
+scalesLocal.add(banana);
+scalesLocal.add(apple);
+scalesLocal.add(orange);
+scalesLocal.add(coconut);
+scalesLocal.getSumScale();
+scalesLocal.getNameList();
+scalesArray.getSumScale();
+scalesArray.getNameList();
 //# sourceMappingURL=app.js.map
