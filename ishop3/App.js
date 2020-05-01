@@ -11,7 +11,7 @@ let shopName="Магазин компьютерной периферии";
 
 ReactDOM.render(
   <IShop
-    shop={shopName}
+   shop={shopName}
     goods={goodsList}
     info={infoList}  
   />

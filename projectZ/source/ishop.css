@@ -1,0 +1,39 @@
+.iShop { background-color: rgba(255, 255, 255, 0.5); width:50vw;  padding: 3px 7px; margin: 0 auto;  color: yellow;}
+.iShop .ShopName{  font-weight: bold;  text-align: center;}
+.iShop .Lists{ padding-top: 5px;}
+
+.iShop .Lists .List{  padding: 2px 0;  display: flex;  flex-basis: auto;  justify-content: space-between; align-items: center;}
+.iShop .Lists .List .Count{     flex-basis: 16.6%; font-weight: bold;text-align: center;}
+.iShop .Lists .List .Count{     flex-basis: 16.6%; text-align: center;}
+.iShop .Lists .List .Text{    flex-basis: 16.6%;    text-align: center;}
+.iShop .Lists .List .Prices{    flex-basis: 16.6%;    text-align: center;    font-style:italic;}
+.iShop .List .List .Imga{    flex-basis: 16.6%;    text-align: center;    font-size: 9px;}
+
+.Blue {background-color: aqua;}
+.Red {color: red;}
+
+.Card {border: dotted green 1px; width: 40vw; padding: 3px 7px;  margin: 10px auto; background-color: lightgreen}
+.Card .ViewInput {min-width: 20vw;}
+.Card .ViewDiv {min-width: 5vw; float: left}
+
+.leftPannel {
+
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 300px;
+    height: 50vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.addsPannel{
+
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-basis: 300px;
+    width: 300px;
+    height: 50vh;
+    position: absolute;
+    right:  0;
+    top: 0;
+}
