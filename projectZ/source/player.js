@@ -31,6 +31,7 @@ class Player extends React.Component {
     workmode: 0,// 0 - show no card mode
     shop: this.props.shop,
     firstChange: false,
+    ownworkmode: 0
 
   }
 
@@ -110,38 +111,59 @@ firstchangeFU = () =>{
   this.setState( {firstChange:true }) 
 }
 
+play=()=>{
+  var zvukElem=document.getElementById('menu')
+  zvukElem.play();
+}
+
+pause=()=>{
+  var zvukElem=document.getElementById('menu');
+  zvukElem.pause();
+  //zvukElem.currentTime=0; 
+};
 
 render() { 
+  let items=(<Items className='List'
+  ownworkmode={this.state.ownworkmode}
+  goods={this.state.goods}
+  info={this.state.info}
+  checked={this.state.checked}//needed for marking item
+  cbcheckedChanged={this.checkedChanged}
+  cbdeletedChanged={this.deletedChanged}
+  cbEditedChanged={this.editedChanged}
+  workmode={this.state.workmode}//needed for disabling buttons in IGood  
+  />);
+  if (this.state.ownworkmode==1) items=null;
 
-  let newButton={}; if (this.state.workmode==2||this.state.workmode==3) {newButton={disabled:true}};
-  return (
-      <div className='iShop'>
-        <div className='ShopName'>{this.props.shop}</div>
-        <LeftPannel className='leftPannel'/>
-        <Items className='List'
-        goods={this.state.goods}
-        info={this.state.info}
-        checked={this.state.checked}//needed for marking item
-        cbcheckedChanged={this.checkedChanged}
-        cbdeletedChanged={this.deletedChanged}
-        cbEditedChanged={this.editedChanged}
-        workmode={this.state.workmode}//needed for disabling buttons in IGood
-    
-        
-        />
-        <AddsPannel className='addsPannel'/>
-         <input type={"button"} value={"New Product"} onClick={this.addNew} {...newButton}></input>     
+  <div className='ShopName'>{this.props.shop}</div>;
+
+  let xxx=(<div>
+  <input type={"button"} value={"New Product"} onClick={this.addNew} {...newButton}></input>     
               <ICard className='List'
               good={this.state.good}
               workmode={this.state.workmode}//needed to choose type of render 
-
               firstChange={this.state.firstChange}//needed for disabling buttons in IGood
               cbCancel={this.cancel}
               cbAdd={this.add}
               cbEdd={this.edd}
-              cbFirstchange={this.firstchangeFU}
-              />
-                    </div>    
+              cbFirstchange={this.firstchangeFU}/></div>);
+  let newButton={}; if (this.state.workmode==2||this.state.workmode==3) {newButton={disabled:true}};
+
+  let output=(<div className='iShop'>
+        <LeftPannel className='leftPannel'/>
+      {items}
+      <audio id='menu'   loop={true} controls={true}>
+        
+    <source src="/source/sound/menu.mp3" type="audio/mpeg"></source>
+</audio>
+<img src="/source/img/phone.png" onClick={this.play}></img>
+<input type={"button"} value={"Play"} onClick={this.play} ></input>  
+<input type={"button"} value={"Stop"} onClick={this.pause} ></input>  
+        <AddsPannel className='addsPannel'/> 
+              
+                    </div>);
+  return (
+       output
       );      
     }          
   }

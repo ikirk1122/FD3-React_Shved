@@ -25,6 +25,7 @@ class Item extends React.Component
         workmode: this.props.workmode,
         index: this.props.index,
         checked: this.props.checked,
+        animation: "None",
 
   }
   componentWillReceiveProps(newProps){
@@ -42,20 +43,32 @@ class Item extends React.Component
   }
 
   deleted = (EO) => { 
-    confirm("Delete Item???")&&(this.props.cbdeletedChanged(this.state.index))
+    
+   confirm("Delete Item???")&&(setTimeout(this.dell,1000)&&this.setState({animation: "Animation"}))
+   
+    
   }
-
+//(this.props.cbdeletedChanged(this.state.index))
   edited = (EO) => { 
     this.props.cbEditedChanged(this.state.index)
   }
+
+  dell=()=>{
+    (this.props.cbdeletedChanged(this.state.index))
+  }
  
+  
+
     render () {
       let delButton={};let eddButton={};
       if (this.state.workmode==2) {delButton={disabled:true}};
  if (this.state.workmode==3) {eddButton={disabled:true}; delButton={disabled:true}};
 
+ let style={};
   
-let item=(<div className="Lists" key={this.state.good.code} className={((this.props.checked==this.state.index)?("List"+" "+"Blue"):'List')}
+let item=(<div className="Lists" key={this.state.good.code} className={((this.props.checked==this.state.index)?("List"+" "+"Blue"+" "+this.state.animation):'List'+" "+this.state.animation)}
+style={style}
+
 data={this.state.good.code} >
 <div className={'Text'} onClick={this.checkedF} data={this.state.good.code}>{this.state.good.text}</div>
 <div className={'Prices'} onClick={this.checkedF} data={this.state.good.code}>{this.state.good.price}</div>

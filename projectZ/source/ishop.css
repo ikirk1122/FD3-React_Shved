@@ -1,13 +1,16 @@
-.iShop { background-color: rgba(255, 255, 255, 0.5); width:50vw;  padding: 3px 7px; margin: 0 auto;  color: yellow;}
+.iShop { background-color: rgba(255, 255, 255, 0.5); width:50vw;  padding: 0px 7px; margin: 0 auto;  color: yellow;}
 .iShop .ShopName{  font-weight: bold;  text-align: center;}
 .iShop .Lists{ padding-top: 5px;}
 
-.iShop .Lists .List{  padding: 2px 0;  display: flex;  flex-basis: auto;  justify-content: space-between; align-items: center;}
+.iShop .Lists .List{  padding: 0px 0;  display: flex;  flex-basis: auto;  justify-content: space-between; align-items: center;color: yellow;}
+.iShop .Lists .List :hover{color: red; transition-duration: 1s;transform: scale(1.2); }
 .iShop .Lists .List .Count{     flex-basis: 16.6%; font-weight: bold;text-align: center;}
 .iShop .Lists .List .Count{     flex-basis: 16.6%; text-align: center;}
 .iShop .Lists .List .Text{    flex-basis: 16.6%;    text-align: center;}
 .iShop .Lists .List .Prices{    flex-basis: 16.6%;    text-align: center;    font-style:italic;}
 .iShop .List .List .Imga{    flex-basis: 16.6%;    text-align: center;    font-size: 9px;}
+
+.Animation { height: 0px; opacity: 0;  transition-duration:1s;}
 
 .Blue {background-color: aqua;}
 .Red {color: red;}
@@ -37,3 +40,5 @@
     right:  0;
     top: 0;
 }
+
+.None {height: 50px;}

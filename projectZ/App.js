@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Player from './source/player';
-import LeftPannel from './source/leftPannel';
+
 
 let goodsList=require('./source/answers.json');
 let infoList=require('./source/answers2.json');
@@ -17,7 +17,7 @@ ReactDOM.render(
     goods={goodsList}
     info={infoList}  
   />
-  
+ 
   , document.getElementById('main') 
 );
 
