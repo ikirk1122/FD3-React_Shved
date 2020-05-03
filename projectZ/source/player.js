@@ -8,6 +8,7 @@ import Items from './items';
 import ICard from './card';
 import LeftPannel from './leftPannel';
 import AddsPannel from './addsPannel';
+import BottomPannel from './bottomPannel';
 
 
 
@@ -150,16 +151,17 @@ render() {
   let newButton={}; if (this.state.workmode==2||this.state.workmode==3) {newButton={disabled:true}};
 
   let output=(<div className='iShop'>
-        <LeftPannel className='leftPannel'/>
+        <LeftPannel />
       {items}
       <audio id='menu'   loop={true} controls={true}>
         
     <source src="/source/sound/menu.mp3" type="audio/mpeg"></source>
 </audio>
-<img src="/source/img/phone.png" onClick={this.play}></img>
+<img className="Img" src="/source/img/phone.png" onClick={this.play}></img>
 <input type={"button"} value={"Play"} onClick={this.play} ></input>  
 <input type={"button"} value={"Stop"} onClick={this.pause} ></input>  
-        <AddsPannel className='addsPannel'/> 
+        <AddsPannel/> 
+        <BottomPannel/>
               
                     </div>);
   return (

@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ishop.css';
 
-class LeftPannel extends React.Component
+class BottomPannel extends React.Component
 {
 
   static propTypes = {
@@ -28,7 +28,7 @@ class LeftPannel extends React.Component
         sourceChangeEdd: null,
         firstChange: this.props.firstChange,
         kkey: 10000000,
-        animation: "leftPannel"
+        animation: "bottomPannel"
   }
   
   componentWillReceiveProps(newProps){  
@@ -168,12 +168,7 @@ move2=()=>{
 let swith=(<div style={style}>ddfddf</div>)
 
 
-let output;
-if (this.state.pannelworkmode==1) output=(<div className={this.state.animation}>   
-{swith}
-<input type={"button"} value={"Close"} onClick={this.move} ></input>  
-             </div>  );
-if (this.state.pannelworkmode==0) output=(<div className={this.state.animation}>   
+let output=(<div className={this.state.animation}>   
 
 <input type={"button"} value={"Open"} onClick={this.move} ></input>  
              </div> );
@@ -182,4 +177,4 @@ if (this.state.pannelworkmode==0) output=(<div className={this.state.animation}>
     }  
   }
 
-  export default LeftPannel;
+  export default BottomPannel;

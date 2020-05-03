@@ -64,7 +64,7 @@ class Item extends React.Component
       if (this.state.workmode==2) {delButton={disabled:true}};
  if (this.state.workmode==3) {eddButton={disabled:true}; delButton={disabled:true}};
 
- let style={};
+ let style={color: "blue"};
   
 let item=(<div className="Lists" key={this.state.good.code} className={((this.props.checked==this.state.index)?("List"+" "+"Blue"+" "+this.state.animation):'List'+" "+this.state.animation)}
 style={style}
