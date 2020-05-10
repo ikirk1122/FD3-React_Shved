@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './player.css';
 import Items from './items';
-import ICard from './card';
+
 import LeftPannel from './leftPannel';
 
 import BottomPannel from './bottomPannel';

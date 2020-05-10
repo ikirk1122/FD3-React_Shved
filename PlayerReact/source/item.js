@@ -159,12 +159,9 @@ if (this.props.workmode==2) item=(
   }
 
   const mapStateToProps = function (state) {
-    // этому компоненту ничего не нужно из хранилища Redux
     return { }; 
   };
-  
-  // но этому компоненту нужен сам this.props.dispatch, и чтобы
-  // он появился, следует присоединить (connect) компонент к хранилищу Redux
+
   const Item = connect(mapStateToProps)(intItem);
 
   export default Item;

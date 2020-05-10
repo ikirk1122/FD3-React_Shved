@@ -225,13 +225,10 @@ return(output)//variable
   }
   const mapStateToProps = function (state) {
     return {
-      // из раздела Redux с именем counter свойство cnt будет доступно
-      // данному компоненту как this.props.cnt
       cnt: state.counter.cnt,
       playing: state.counter.song
     };
   };
   
-  // присоединяем (connect) компонент к хранилищу Redux
   const BottomPannel = connect(mapStateToProps)(intBottomPannel);
   export default BottomPannel;
