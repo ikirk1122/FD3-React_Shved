@@ -4,19 +4,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './player.css';
+import { NavLink } from 'react-router-dom';
+import { withRouter } from "react-router";
 
 class LeftPannel extends React.PureComponent
 {
-
+ 
   static propTypes = {
     cbSetWorkmodeToZero: PropTypes.func.isRequired,
     cbSetWorkmodeToOne: PropTypes.func.isRequired,
   };
 
+  componentWillMount(){
+    setTimeout(this.allow,2600)
+  }
 
   state = {
         good: this.props.good,
-        
+        chooseButton: {disabled:true},
         workmode: 1,
         checked: this.props.checked,
         textChangeAdd: null,
@@ -40,6 +45,11 @@ class LeftPannel extends React.PureComponent
   if (newProps.workmode==1) this.setState({animation: "leftPannel"});
   if (newProps.workmode==0) this.setState({animation: "leftPannel AnimationLeftPannel"})
   
+  }
+
+
+  allow=()=>{
+this.setState({chooseButton: {}})
   }
 
 forInCycle = (hash) =>{
@@ -116,19 +126,28 @@ edd = () => {
 }
 
 artist = (EO) => { 
-  this.props.cbSetWorkmodeToZero()
+  this.props.history.push("/spotify:artists");
+  //this.props.cbSetWorkmodeToZero()
 }
 
 songs = (EO) => { 
-  this.props.cbSetWorkmodeToOne()
+  this.props.history.push("/spotify:songs");
+  //this.props.cbSetWorkmodeToOne()
 }
 
 mySongs = (EO) => { 
-  this.props.cbSetWorkmodeToMySongs()
+  this.props.history.push("/spotify:mysongs");
+  //this.props.cbSetWorkmodeToMySongs()
+}
+
+main = (EO) => { 
+  //this.props.cbSetWorkmodeToMain();
+  this.props.history.push("/spotify:main");
 }
 
 search = (EO) => { 
-  this.props.cbSearch()
+  this.props.history.push("/spotify:search");
+  //this.props.cbSearch()
 }
 
 move=()=>{
@@ -145,21 +164,27 @@ move2=()=>{
 }
 
     render () {
+      setTimeout(allow,2000);
+
+      
       let style={color: "lightblue"};
 let swith=(<div style={style}>ddfddf</div>)
 
-
+let chooseButton=this.state.chooseButton;
 let output=null;
+
+function allow(){
+        chooseButton={}
+}
 //if (this.state.workmode==1) 
 output=(<div className={this.state.animation}>
   <img src="/source/img/logo.png" style={{width: 100 + '%'}}></img>   
-
- 
-<input type={"button"} value={"Artists"} onClick={this.artist} ></input>  
-<input type={"button"} value={"All songs"} onClick={this.songs} ></input>
-<input type={"button"} value={"My songs"} onClick={this.mySongs} ></input> 
-<input type={"button"} value={"Search..."} onClick={this.search} ></input>
-<input type={"button"} value="&lArr; Close" onClick={this.move} ></input>      
+<input type={"button"} value={"Main"} onClick={this.main} {...chooseButton}></input>   
+<input type={"button"} value={"Artists"} onClick={this.artist} {...chooseButton}></input>  
+<input type={"button"} value={"All songs"} onClick={this.songs} {...chooseButton}></input>
+<input type={"button"} value={"My songs"} onClick={this.mySongs} {...chooseButton}></input> 
+<input type={"button"} value={"Search..."} onClick={this.search} {...chooseButton}></input>
+<input type={"button"} value="&lArr; Close" onClick={this.move} {...chooseButton}></input>      
              </div>  );
 //if (this.state.workmode==0) output=null;
 
@@ -167,4 +192,4 @@ output=(<div className={this.state.animation}>
     }  
   }
 
-  export default LeftPannel;
+  export default withRouter(LeftPannel);
