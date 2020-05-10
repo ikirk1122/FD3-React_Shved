@@ -17,7 +17,6 @@ class PagesRouter extends React.Component {
   }
 
   render() {
-// <Route path="/" exact component={BeforePlayer} /> >
     return (  <div>
    <Route path="/" exact component={BeforePlayer} />
 <Route path="/spotify:parameter" component={BeforePlayer} />

@@ -48,7 +48,7 @@ class Player extends React.PureComponent {
     checked: undefined,// current choosen
     good: undefined,
 
-    workmode: 1,//items and item view mode - artist, songs, mysongs, search
+    workmode: 10,//items and item view mode - artist, songs, mysongs, search
     chosenArtist: undefined,
     firstChange: false,
     ownworkmode: 1,//player view mode - work or loggin mode

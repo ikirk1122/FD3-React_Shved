@@ -16,7 +16,6 @@ class BeforePlayer extends React.PureComponent {
       <Player
         workmode={workmode}
         search={search}
-        skyProps={this.props.match.params.parameter}
       />
     );
     
