@@ -15,8 +15,9 @@ class LeftPannel extends React.PureComponent
     cbSetWorkmodeToOne: PropTypes.func.isRequired,
   };
 
-  componentWillMount(){
-    setTimeout(this.allow,2600)
+  componentDidMount(){
+    if (this.props.history.location.pathname=="/") setTimeout(this.allow,3000);
+    if (this.props.history.location.pathname!="/") this.setState({chooseButton: {}})
   }
 
   state = {
@@ -49,8 +50,12 @@ class LeftPannel extends React.PureComponent
 
 
   allow=()=>{
-this.setState({chooseButton: {}})
+      if (this.props.history.location.pathname=="/") this.props.history.push("/spotify:main");
   }
+
+  allowB=()=>{
+    if (this.props.history.location.pathname=="/") this.setState({chooseButton: {}});
+}
 
 forInCycle = (hash) =>{
   let arr=[];
@@ -164,8 +169,7 @@ move2=()=>{
 }
 
     render () {
-      setTimeout(allow,2000);
-
+      
       
       let style={color: "lightblue"};
 let swith=(<div style={style}>ddfddf</div>)
@@ -173,9 +177,7 @@ let swith=(<div style={style}>ddfddf</div>)
 let chooseButton=this.state.chooseButton;
 let output=null;
 
-function allow(){
-        chooseButton={}
-}
+
 //if (this.state.workmode==1) 
 output=(<div className={this.state.animation}>
   <img src="/source/img/logo.png" style={{width: 100 + '%'}}></img>   

@@ -27,6 +27,7 @@ class Player extends React.PureComponent {
 
   componentDidMount() {
     this.restoreAllData();
+    
   }
 
   static propTypes = {
@@ -124,7 +125,7 @@ moveToArtist=(artist)=>{
 }
 
 render() { 
-
+  
   if (this.state.songs==undefined||this.state.artists==undefined||this.state.mysongs==undefined)
   return (<div style={{fontSize: "18px", color: "orange", textAlign: "center"}}>LOADING DATA...<br></br>PLEASE WAIT A MINUTE...<hr></hr></div>);
   
